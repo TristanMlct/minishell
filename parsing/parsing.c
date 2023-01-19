@@ -6,7 +6,7 @@
 /*   By: tmilcent <tmilcent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/16 14:04:21 by tmilcent          #+#    #+#             */
-/*   Updated: 2023/01/18 22:05:55 by tmilcent         ###   ########.fr       */
+/*   Updated: 2023/01/19 21:46:40 by tmilcent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ int	count_unescaped_singlequote(char *line)
 	in_double_quote = 0;
 	while (line[++i])
 	{
-		if (line[i] == '"')
+		if (line[i] == '"' && c % 2 == 0)
 			in_double_quote = (in_double_quote + 1) % 2;
 		if (line[i] == '\'')
 		{
@@ -64,7 +64,7 @@ int	count_unescaped_doublequote(char *line)
 	in_single_quote = 0;
 	while (line[++i])
 	{
-		if (line[i] == '\'')
+		if (line[i] == '\'' && c % 2 == 0)
 			in_single_quote = (in_single_quote + 1) % 2;
 		if (line[i] == '"')
 		{

@@ -6,7 +6,7 @@
 /*   By: tmilcent <tmilcent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/16 14:15:06 by tmilcent          #+#    #+#             */
-/*   Updated: 2023/01/18 21:44:44 by tmilcent         ###   ########.fr       */
+/*   Updated: 2023/01/19 21:47:22 by tmilcent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,6 +78,8 @@ int	main(void)
 	test_count_unescaped_singlequote("echo 'bon\\'jour'", 3);
 	test_count_unescaped_singlequote("echo 'bon\"'j\"our'", 2);
 	test_count_unescaped_singlequote("echo 'bon\"\\'j\"our'", 2);
+	test_count_unescaped_singlequote("e'cho' '\"bon'j'our\"'", 6);
+
 	printf("\n");
 	printf("Tests count_unescaped_doublequote : \n");
 	test_count_unescaped_doublequote("echo bonjour", 0);
@@ -89,10 +91,18 @@ int	main(void)
 	test_count_unescaped_doublequote("echo \"bon\\\"jour\"", 3);
 	test_count_unescaped_doublequote("echo \"bon'\"'jour\"", 2);
 	test_count_unescaped_doublequote("echo \"bon'\\\"j'our\"", 2);
+	test_count_unescaped_doublequote("e'cho' '\"bon'j'our\"'", 0);
+	test_count_unescaped_doublequote("e'cho' \"'bon\"j\"our'\"", 4);
+
 	printf("\n");
 	printf("Tests sanitize_line : \n");
 	test_sanitize_line("echo bonjour", "echo bonjour");
 	test_sanitize_line("echo \"bonjour\"", "echo bonjour");
 	test_sanitize_line("echo 'bonjour'", "echo bonjour");
 	test_sanitize_line("echo \"bon'j'our\"", "echo bon'j'our");
+	test_sanitize_line("echo \"bon'j'our\"", "echo bon'j'our");
+	test_sanitize_line("echo \"bon\"j\"our\"", "echo bonjour");
+	test_sanitize_line("e'cho' \"bon'j'our\"", "echo bon'j'our");
+	test_sanitize_line("e'cho' '\"bon'j'our\"'", "echo \"bonjour\"");
+	test_sanitize_line("e\"cho\" \"'bon\"j\"our'\"", "echo 'bonjour'");
 }
