@@ -1,26 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   test_parsing.h                                     :+:      :+:    :+:   */
+/*   ft_toupper.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tmilcent <tmilcent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/01/18 21:10:46 by tmilcent          #+#    #+#             */
-/*   Updated: 2023/01/22 16:03:30 by tmilcent         ###   ########.fr       */
+/*   Created: 2022/10/16 23:24:55 by tmilcent          #+#    #+#             */
+/*   Updated: 2022/10/16 23:35:19 by tmilcent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef TEST_PARSING_H
-# define TEST_PARSING_H
-
-# include <stdio.h>
-# include "../parsing/parsing.h"
-
-/*
-	test_color_utils.c
-*/
-void	red(void);
-void	green(void);
-void	reset_color(void);
-
-#endif
+int	ft_toupper(int c)
+{
+	if (c >= 'a' && c <= 'z')
+		c -= 32;
+	return (c);
+}

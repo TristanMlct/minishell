@@ -1,26 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   test_parsing.h                                     :+:      :+:    :+:   */
+/*   ft_lstadd_back.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tmilcent <tmilcent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/01/18 21:10:46 by tmilcent          #+#    #+#             */
-/*   Updated: 2023/01/22 16:03:30 by tmilcent         ###   ########.fr       */
+/*   Created: 2022/10/26 23:11:36 by tmilcent          #+#    #+#             */
+/*   Updated: 2022/10/26 23:17:55 by tmilcent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef TEST_PARSING_H
-# define TEST_PARSING_H
+#include "libft.h"
 
-# include <stdio.h>
-# include "../parsing/parsing.h"
+void	ft_lstadd_back(t_list **lst, t_list *new)
+{
+	t_list	*last_elem;
 
-/*
-	test_color_utils.c
-*/
-void	red(void);
-void	green(void);
-void	reset_color(void);
-
-#endif
+	if (lst)
+	{
+		if (*lst)
+		{
+			last_elem = ft_lstlast(*lst);
+			last_elem->next = new;
+		}
+		else
+		{
+			*lst = new;
+		}	
+	}
+}

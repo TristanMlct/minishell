@@ -6,24 +6,11 @@
 /*   By: tmilcent <tmilcent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/16 14:04:21 by tmilcent          #+#    #+#             */
-/*   Updated: 2023/01/19 21:46:40 by tmilcent         ###   ########.fr       */
+/*   Updated: 2023/01/22 19:09:26 by tmilcent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parsing.h"
-
-/*
-	TODO(Tristan) : to be remove when libft will be include
-*/
-int	ft_strlen(const char *str)
-{
-	int	i;
-
-	i = 0;
-	while (str[i])
-		i++;
-	return (i);
-}
 
 /*
 	Count the number on single quote that matter (not between double quote).
@@ -103,4 +90,66 @@ char	*sanitize_line(char *line)
 			sanitized_line[++j] = line[i];
 	}
 	return (sanitized_line);
+}
+
+/*
+	Get the node type of a char* 
+	- the different possibility node type are listed in the enum "e_node_type"
+*/
+enum e_node_type	get_node_type(char *args)
+{
+	if (!args || ft_strlen(args) == 0)
+		return (0);
+	if (ft_strcmp(args, "|") == 0)
+		return (PIPE);
+	else if (ft_strcmp(args, "&&") == 0)
+		return (AND);
+	else if (ft_strcmp(args, "||") == 0)
+		return (OR);
+	else if (ft_strlen(args) >= 2 && args[0] == '<' && args[1] == '<')
+		return (REDIRECT_2_INPUT);
+	else if (ft_strlen(args) >= 2 && args[0] == '>' && args[1] == '>')
+		return (REDIRECT_2_OUTPUT);
+	else if (args[0] == '<')
+		return (REDIRECT_INPUT);
+	else if (args[0] == '>')
+		return (REDIRECT_OUTPUT);
+	else
+		return (COMMAND);
+}
+
+/*
+	Get line as a tab of node
+*/
+t_node	**get_line_as_nodes(char **line_as_tab)
+{
+	int		tab_size;
+	t_node	**line_as_nodes;
+
+	tab_size = 0;
+	while (line_as_tab[tab_size] != 0)
+		tab_size++;
+	line_as_nodes = malloc(sizeof(*line_as_nodes) * (tab_size + 1));
+	line_as_nodes[tab_size] = 0;
+	while (--tab_size >= 0)
+	{
+		line_as_nodes[tab_size] = create_node();
+		line_as_nodes[tab_size]->type = get_node_type(line_as_tab[tab_size]);
+		line_as_nodes[tab_size]->arg = ft_strdup(line_as_tab[tab_size]);
+	}
+	return (line_as_nodes);
+}
+
+/*
+	Line parsing
+*/
+t_node	**parse_line(char *line)
+{
+	char	**line_split;
+	t_node	**line_as_nodes;
+
+	line_split = ft_split(line, ' ');
+	line_as_nodes = get_line_as_nodes(line_split);
+	free(line_split);
+	return (line_as_nodes);
 }

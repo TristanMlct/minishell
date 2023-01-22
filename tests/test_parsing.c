@@ -6,11 +6,10 @@
 /*   By: tmilcent <tmilcent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/16 14:15:06 by tmilcent          #+#    #+#             */
-/*   Updated: 2023/01/19 21:47:22 by tmilcent         ###   ########.fr       */
+/*   Updated: 2023/01/22 18:33:39 by tmilcent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "parsing.h"
 #include "test_parsing.h"
 #include <string.h>
 
@@ -105,4 +104,15 @@ int	main(void)
 	test_sanitize_line("e'cho' \"bon'j'our\"", "echo bon'j'our");
 	test_sanitize_line("e'cho' '\"bon'j'our\"'", "echo \"bonjour\"");
 	test_sanitize_line("e\"cho\" \"'bon\"j\"our'\"", "echo 'bonjour'");
+	test_sanitize_line("cat \"a\"\"b\"", "cat ab");
+
+	printf("\n");
+	printf("Tests parse_line : \n");
+	t_node **test;
+	char *line = "echo bonjour >hey >>hey2 >> hey3";
+	printf("%s\n", line);
+	test = parse_line(line);
+	int i = -1;
+	while (test[++i] != 0)
+		print_node(*test[i]);
 }

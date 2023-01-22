@@ -1,26 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   test_parsing.h                                     :+:      :+:    :+:   */
+/*   ft_lstnew.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tmilcent <tmilcent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/01/18 21:10:46 by tmilcent          #+#    #+#             */
-/*   Updated: 2023/01/22 16:03:30 by tmilcent         ###   ########.fr       */
+/*   Created: 2022/10/26 22:33:29 by tmilcent          #+#    #+#             */
+/*   Updated: 2022/10/26 22:40:47 by tmilcent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef TEST_PARSING_H
-# define TEST_PARSING_H
+#include "libft.h"
 
-# include <stdio.h>
-# include "../parsing/parsing.h"
+t_list	*ft_lstnew(void *content)
+{
+	t_list	*r;
 
-/*
-	test_color_utils.c
-*/
-void	red(void);
-void	green(void);
-void	reset_color(void);
-
-#endif
+	r = malloc(sizeof(t_list));
+	if (!r)
+		return (0);
+	r->content = content;
+	r->next = 0;
+	return (r);
+}

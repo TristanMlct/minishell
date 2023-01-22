@@ -1,26 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   test_parsing.h                                     :+:      :+:    :+:   */
+/*   ft_strlen.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tmilcent <tmilcent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/01/18 21:10:46 by tmilcent          #+#    #+#             */
-/*   Updated: 2023/01/22 16:03:30 by tmilcent         ###   ########.fr       */
+/*   Created: 2022/10/16 21:05:19 by tmilcent          #+#    #+#             */
+/*   Updated: 2022/10/16 21:40:53 by tmilcent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef TEST_PARSING_H
-# define TEST_PARSING_H
+#include "libft.h"
 
-# include <stdio.h>
-# include "../parsing/parsing.h"
+size_t	ft_strlen(const char *str)
+{
+	size_t	i;
 
-/*
-	test_color_utils.c
-*/
-void	red(void);
-void	green(void);
-void	reset_color(void);
-
-#endif
+	i = 0;
+	while (str[i])
+		i++;
+	return (i);
+}
