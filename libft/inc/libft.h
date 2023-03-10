@@ -6,7 +6,7 @@
 /*   By: mhug <mhug@student.42nice.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/07 12:14:37 by mhug              #+#    #+#             */
-/*   Updated: 2023/03/07 10:07:37 by mhug             ###   ########.fr       */
+/*   Updated: 2023/03/10 09:17:47 by mhug             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,9 @@
 # include <stdint.h>
 
 # define PI 3.141592654
+
+typedef struct s_list	t_list;
+typedef struct s_dlist	t_dlist;
 
 /*
 ** <string.h>
@@ -112,11 +115,11 @@ void		ft_putnbr_fd(int n, int fd);
 */
 size_t		ft_arr_str_len(char **arr);
 
-typedef struct s_list
+struct s_list
 {
-	void			*content;
-	struct s_list	*next;
-}				t_list;
+	void	*content;
+	t_list	*next;
+};
 
 t_list		*ft_lstnew(void *content);
 void		ft_lstadd_front(t_list **lst, t_list *new);
@@ -128,5 +131,27 @@ void		ft_lstdelone(t_list *lst, void (*del)(void *));
 void		ft_lstclear(t_list **lst, void (*del)(void *));
 void		ft_lstiter(t_list *lst, void (*f)(void *));
 t_list		*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *));
+
+struct s_dlist
+{
+	void	*content;
+	t_dlist	*next;
+	t_dlist	*prev;
+};
+
+t_dlist		*ft_dlstnew(void *content);
+t_dlist		*ft_dlstlast(t_dlist *head);
+void		ft_dlstadd_front(t_dlist **head, t_dlist *new);
+void		ft_dlstadd_back(t_dlist **head, t_dlist *new);
+int			ft_dlstsize(t_dlist *lst);
+t_dlist		*ft_dlstfind(t_dlist *head, void *content,
+				int (*cmp)(void *, void *));
+void		ft_dlstinsert_after(t_dlist *elem, t_dlist *new);
+void		ft_dlstinsert_before(t_dlist **head, t_dlist *token, t_dlist *new);
+void		ft_dlstiter(t_dlist *head, void (*f)(void *));
+void		ft_dlstdelone(t_dlist **head, t_dlist *elem, void (*del)(void *));
+void		ft_dlstclear(t_dlist **lst, void (*del)(void *));
+void		ft_dlstdelif(t_dlist **head, void *data_ref,
+				int (*cmp)(), void (*del)(void *));
 
 #endif

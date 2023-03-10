@@ -49,6 +49,10 @@ ft_print_str.c ft_printf.c ft_spec_utils.c
 SRC_LST	= \
 ft_lstnew.c ft_lstadd_front.c ft_lstadd_back.c ft_lstsize.c ft_lstlast.c\
 ft_lstdelone.c ft_lstclear.c ft_lstiter.c ft_lstmap.c ft_lstfind.c
+SRC_DLST = \
+ft_dlstnew.c ft_dlstadd_front.c ft_dlstadd_back.c ft_dlstsize.c ft_dlstlast.c\
+ft_dlstdelone.c ft_dlstclear.c ft_dlstiter.c ft_dlstdelif.c ft_dlstfind.c\
+ft_dlstinsert_before.c ft_dlstinsert_after.c 
 SRC_GNL	= \
 get_next_line.c get_next_line_utils.c
 SRC_BTREE = \
@@ -67,11 +71,12 @@ OBJ_MATH = $(addprefix $(OBJ_PATH), $(SRC_MATH:.c=.o))
 OBJ_PUT = $(addprefix $(OBJ_PATH), $(SRC_PUT:.c=.o))
 OBJ_PRINTF = $(addprefix $(OBJ_PATH), $(SRC_PRINTF:.c=.o))
 OBJ_LST = $(addprefix $(OBJ_PATH), $(SRC_LST:.c=.o))
+OBJ_DLST = $(addprefix $(OBJ_PATH), $(SRC_DLST:.c=.o))
 OBJ_GNL = $(addprefix $(OBJ_PATH), $(SRC_GNL:.c=.o))
 OBJ_BTREE = $(addprefix $(OBJ_PATH), $(SRC_BTREE:.c=.o))
 
 OBJ_ALL	=	$(OBJ_MEM) $(OBJ_TYPE) $(OBJ_STR) $(OBJ_ARR) $(OBJ_MATH) \
-			$(OBJ_PUT) $(OBJ_PRINTF) $(OBJ_LST) $(OBJ_GNL) $(OBJ_BTREE)
+			$(OBJ_PUT) $(OBJ_PRINTF) $(OBJ_LST) $(OBJ_DLST) $(OBJ_GNL) $(OBJ_BTREE)
 ### HEADER FILES ###
 INCS	= 	-I inc
 
@@ -122,6 +127,11 @@ $(OBJ_PATH)%.o:		$(SRC_PATH)printf/%.c
 					@printf $(UP)$(CLEAR)
 
 $(OBJ_PATH)%.o:		$(SRC_PATH)lst/%.c
+					@echo $(Y)Compiling [$@]...$(X)
+					@$(CC) $(CFLAGS) -o $@ -c $< $(INCS)
+					@printf $(UP)$(CLEAR)
+
+$(OBJ_PATH)%.o:		$(SRC_PATH)dlst/%.c
 					@echo $(Y)Compiling [$@]...$(X)
 					@$(CC) $(CFLAGS) -o $@ -c $< $(INCS)
 					@printf $(UP)$(CLEAR)
